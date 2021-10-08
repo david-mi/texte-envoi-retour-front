@@ -15,13 +15,29 @@ fetch(apiGet)
 .then(res => res.json())
 .then(dataApi => {
     for (let d of dataApi){
-        console.log(d)
-        document.querySelector('.return').innerHTML += `
-        <div class="return__item">
-            <span><b>Nom:</b> ${d.name}</span>
-            <span><b>Description:</b> ${d.comment}</span>
-            <span><b>Date:</b> ${d.date}</span>
-        </div>`
+        console.log(d.imageUrl)
+        if (d.imageUrl === ''){
+            console.log('mdrrr')
+            document.querySelector('.return').innerHTML += `
+                <div class="return__item--container">
+                    <div class="return__item">
+                        <span><b>Nom:</b> ${d.name}</span>
+                        <span><b>Description:</b> ${d.comment}</span>
+                        <span><b>Date:</b> ${d.date}</span>
+                    </div>
+                </div>`
+        }else{
+          document.querySelector('.return').innerHTML += `
+            <div class="return__item--container">
+                <div class="return__item">
+                    <span><b>Nom:</b> ${d.name}</span>
+                    <span><b>Description:</b> ${d.comment}</span>
+                    <img src=${d.imageUrl} />
+                    <span><b>Date:</b> ${d.date}</span>
+                </div>
+            </div>`  
+        }
+        
     }
 })
 
@@ -43,6 +59,7 @@ const formInputs = document.querySelectorAll('.entry');
 let data = {
     name: '',
     comment: '',
+    imageUrl: '',
     date: ''
 }
 
@@ -52,8 +69,10 @@ for (let entry of formInputs){
     entry.addEventListener('input', () =>{
         if (entry.id === 'name'){
             data.name = entry.value; 
-        }else{
+        }else if (entry.id === 'comment'){
             data.comment = entry.value; 
+        }else{
+            data.imageUrl = entry.value;
         }
     })
 }
@@ -74,7 +93,7 @@ const postData = () =>{
             console.log('erreur')
         }else{
             console.log('envoi effectué')
-            window.location.reload()
+            // window.location.reload()
             return res.json()
         }
         
@@ -87,6 +106,6 @@ const sendBtn = document.querySelector('.btn');
 sendBtn.addEventListener('click', (e) =>{
         e.preventDefault();
         data.date = dateShow
-        console.log(date)
+        console.log(data)
         postData();
     })
