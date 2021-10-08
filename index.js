@@ -1,5 +1,17 @@
+let apiGet = ''
+let apiPost = ''
+
+/// détermination si l'api est locale ou distante
+if (window.origin === 'http://127.0.0.1:5500'){
+    apiGet = 'http://localhost:3000/api/';
+    apiPost = 'http://localhost:3000/api/post'
+}else{
+    apiGet = 'https://texte-envoi-retour.herokuapp.com/api/';
+    apiPost = 'https://texte-envoi-retour.herokuapp.com/api/post' 
+    }
+
 /// fetch vers l'api
-const apiGet = 'http://localhost:3000/api/'
+
 fetch(apiGet)
 .then(res => res.json())
 .then(dataApi => {
@@ -37,10 +49,9 @@ for (let entry of formInputs){
 
 
 // fonction pour l'envoi des données
-const api = 'http://localhost:3000/api/post'
 const postData = () =>{
     console.log(JSON.stringify(data))
-    fetch(api, {
+    fetch(apiPost, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
