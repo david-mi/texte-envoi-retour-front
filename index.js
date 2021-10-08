@@ -11,7 +11,6 @@ if (window.origin === 'http://127.0.0.1:5500'){
     }
 
 /// fetch vers l'api
-
 fetch(apiGet)
 .then(res => res.json())
 .then(dataApi => {
@@ -21,9 +20,21 @@ fetch(apiGet)
         <div class="return__item">
             <span><b>Nom:</b> ${d.name}</span>
             <span><b>Description:</b> ${d.comment}</span>
+            <span><b>Date:</b> ${d.date}</span>
         </div>`
     }
-}) 
+})
+
+let today = new Date();
+let date = `${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
+let hour = `${today.getHours()}:${today.getMinutes()}`
+
+let dateShow = `Le ${date} à ${hour}`
+
+// setInterval(() =>{
+//     window.location.reload()
+// },1000)
+
 
 /// sélections des inputs
 const formInputs = document.querySelectorAll('.entry');
@@ -31,7 +42,8 @@ const formInputs = document.querySelectorAll('.entry');
 /// objet qui sera rempli par les inputs
 let data = {
     name: '',
-    comment: ''
+    comment: '',
+    date: ''
 }
 
 /// boucle à travers les entrées
@@ -74,5 +86,7 @@ const postData = () =>{
 const sendBtn = document.querySelector('.btn');
 sendBtn.addEventListener('click', (e) =>{
         e.preventDefault();
+        data.date = dateShow
+        console.log(date)
         postData();
     })
