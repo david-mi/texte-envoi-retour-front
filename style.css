@@ -1,0 +1,79 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    font-family: 'Source Code Pro', monospace;
+    padding-top: 50px;
+}
+
+.send__container,
+.return__container{
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.send__container{
+    border: 0px;
+}
+
+label{
+    display: inline-block;
+    width: 120px;
+}
+
+input, textarea{
+    padding: 5px;
+    flex: 1 1 auto;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+div{
+    display: flex;
+    align-items: center;
+}
+
+h2{
+    padding-bottom: 50px;
+    font-size: 2rem;
+}
+
+hr{
+    margin-top: -50px;
+}
+
+button{
+    width: fit-content;
+    padding: 5px 10px;
+    align-self: center;
+}
+
+.return{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.return__item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+label{
+    text-align: center;
+    padding-right: 20px;
+    font-weight: 700;
+}
