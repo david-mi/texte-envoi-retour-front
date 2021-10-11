@@ -10,16 +10,17 @@ if (window.origin === 'http://127.0.0.1:5500'){
     apiPost = 'https://texte-envoi-retour.herokuapp.com/api/post' 
     }
 
+const returnCont = document.querySelector('.return'); 
 /// fetch vers l'api
 fetch(apiGet)
 .then(res => res.json())
 .then(dataApi => {
+    returnCont.classList.remove('spinner');
     for (let d of dataApi){
         console.log(d.imageUrl)
         if (d.imageUrl === ''){
-            console.log('mdrrr')
-            document.querySelector('.return').innerHTML += `
-                <div class="return__item--container">
+            returnCont.innerHTML += `
+                <div class="return__item--container opacity">
                     <div class="return__item">
                         <span><b>Nom:</b> ${d.name}</span>
                         <span><b>Description:</b> ${d.comment}</span>
@@ -28,7 +29,7 @@ fetch(apiGet)
                 </div>`
         }else{
           document.querySelector('.return').innerHTML += `
-            <div class="return__item--container">
+            <div class="return__item--container opacity">
                 <div class="return__item">
                     <span><b>Nom:</b> ${d.name}</span>
                     <span><b>Description:</b> ${d.comment}</span>
