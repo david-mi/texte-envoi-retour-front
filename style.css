@@ -1,10 +1,12 @@
+
+
 *{
     margin: 0px;
     padding: 0px;
 }
 
 body{
-    height: 100vh;
+    height: calc(100vh - 50px);
     display: flex;
     font-family: 'Source Code Pro', monospace;
     padding-top: 50px;
@@ -16,11 +18,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    
     
 }
 
 .send__container{
     border: 0px;
+    padding: 20px;
 }
 
 label{
@@ -44,6 +49,10 @@ div{
     align-items: center;
 }
 
+span{
+    padding-block: 5px;
+}
+
 h2{
     padding-bottom: 50px;
     font-size: 2rem;
@@ -51,6 +60,8 @@ h2{
 
 hr{
     margin-top: -50px;
+    width: 4px;
+    background-color: black;
 }
 
 button{
@@ -118,4 +129,31 @@ ul{
 
 li{
     padding-bottom: 10px;
+}
+
+@keyframes spinner {
+    50%{
+        transform: rotate(3turn);
+        top: 100px;
+    }
+
+}
+
+.spinner{
+    animation: spinner 4s linear infinite;
+    background-color: black;
+    width: 20%;
+    height: 5px;
+    position: absolute;
+    top: 50%;
+}
+
+@keyframes opacity {
+    0%{
+        opacity: 0;
+    }
+}
+
+.opacity{
+    animation: opacity 500ms ease-in-out backwards;
 }
