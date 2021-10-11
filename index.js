@@ -2,7 +2,7 @@ let apiGet = ''
 let apiPost = ''
 
 /// détermination si l'api est locale ou distante
-if (window.origin === 'http://127.0.0.1:5500'){
+if (window.origin === 'http://127.0.0.1:5500' || 'http://localhost:5500'){
     apiGet = 'http://localhost:3000/api/';
     apiPost = 'http://localhost:3000/api/post'
 }else{
@@ -17,29 +17,51 @@ fetch(apiGet)
 .then(dataApi => {
     returnCont.classList.remove('spinner');
     for (let d of dataApi){
-        console.log(d.imageUrl)
         if (d.imageUrl === ''){
             returnCont.innerHTML += `
                 <div class="return__item--container opacity">
-                    <div class="return__item">
-                        <span><b>Nom:</b> ${d.name}</span>
-                        <span><b>Description:</b> ${d.comment}</span>
-                        <span><b>Date:</b> ${d.date}</span>
-                    </div>
+                        <span class="name"><b>Nom:</b> ${d.name}</span>
+                        <span class="desc"><b>Description:</b> ${d.comment}</span>
+                        <span class="date"><b>Date:</b> ${d.date}</span>
+                        <span class="id">${d._id}</span>
+                        <button class="del-btn"></button>
                 </div>`
         }else{
           document.querySelector('.return').innerHTML += `
             <div class="return__item--container opacity">
-                <div class="return__item">
-                    <span><b>Nom:</b> ${d.name}</span>
-                    <span><b>Description:</b> ${d.comment}</span>
+                    <span date="name"><b>Nom:</b> ${d.name}</span>
+                    <span class="desc"><b>Description:</b> ${d.comment}</span>
                     <img src=${d.imageUrl} />
-                    <span><b>Date:</b> ${d.date}</span>
-                </div>
+                    <span class="date"><b>Date:</b> ${d.date}</span>
+                    <span class="id">${d._id}</span>
+                    <button class="del-btn"></button>
             </div>`  
         }
         
     }
+    /// requête delete
+}).then(() => {
+let ids = document.querySelectorAll('.id');
+const delBtn = document.querySelectorAll('.del-btn')
+
+for (let i = 0; i < ids.length; i++){
+    delBtn[i].addEventListener('click', () =>{
+        console.log(delBtn[i])
+        console.log(ids[i].innerText)
+        let idValue = ids[i].innerText;
+        console.log(idValue)
+        deleteFromdB(idValue)
+        document.querySelectorAll('.return__item--container')[i].classList.add('display');
+    })
+}
+
+const deleteFromdB = (value) =>{
+    fetch(apiGet + value,{
+        method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(res => console.log(res))
+}
 })
 
 let today = new Date();
@@ -103,10 +125,14 @@ const postData = () =>{
 }
 
 // écoute du clic  sur le bouton envoyer
-const sendBtn = document.querySelector('.btn');
+const sendBtn = document.querySelector('.send-btn');
 sendBtn.addEventListener('click', (e) =>{
         e.preventDefault();
         data.date = dateShow
         console.log(data)
         postData();
     })
+
+
+
+
