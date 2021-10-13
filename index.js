@@ -151,7 +151,7 @@ fetch(apiGet)
             console.log('erreur')
         }else{
             console.log('envoi effectué')
-            // window.location.reload()
+            window.location.reload()
             return res.json()
         }
         
