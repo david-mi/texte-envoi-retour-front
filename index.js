@@ -1,11 +1,8 @@
-let apiGet = ''
-let apiPost = ''
+let apiGet = 'http://localhost:3000/api/';
+let apiPost = 'http://localhost:3000/api/post'
 
 /// détermination si l'api est locale ou distante
-if (window.origin === 'http://127.0.0.1:5500'){
-apiGet = 'http://localhost:3000/api/';
-apiPost = 'http://localhost:3000/api/post'
-}else{
+if (window.origin !== 'http://127.0.0.1:5500'){
     apiGet = 'https://texte-envoi-retour.herokuapp.com/api/';
     apiPost = 'https://texte-envoi-retour.herokuapp.com/api/post' 
 }
