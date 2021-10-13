@@ -1,8 +1,11 @@
-let apiGet = 'http://localhost:3000/api/';
-let apiPost = 'http://localhost:3000/api/post'
+let apiGet = ''
+let apiPost = ''
 
 /// détermination si l'api est locale ou distante
 if (window.origin !== 'http://127.0.0.1:5500'){
+    apiGet = 'http://localhost:3000/api/';
+    apiPost = 'http://localhost:3000/api/post'
+}else{
     apiGet = 'https://texte-envoi-retour.herokuapp.com/api/';
     apiPost = 'https://texte-envoi-retour.herokuapp.com/api/post' 
 }
@@ -70,11 +73,6 @@ fetch(apiGet)
     let hour = `${today.getHours()}:${today.getMinutes()}`
     
     let dateShow = `${date} - ${hour}`
-    
-    // setInterval(() =>{
-    //     window.location.reload()
-    // },1000)
-    
     
     /// sélections des inputs
     const formInputs = document.querySelectorAll('.entry');
