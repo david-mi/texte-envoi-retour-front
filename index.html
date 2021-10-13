@@ -12,17 +12,21 @@
     <title>Training back</title>
 </head>
 <body>
+    <h1>Training Back</h1>
+    <div class="return__container">
+        <div class="return spinner"></div>
+    </div>
     <fieldset class="send__container">
         <form method="POST" action="/yes.php">
-            <div>
+            <div class="name">
                 <label for="name"></label>
                 <input type="text" id="name" class="entry" placeholder="Nom">
             </div>
-            <div>
+            <div class="comment">
                 <label for="comment"></label>
-                <textarea name="comment" id="comment" cols="30" rows="10" class="entry" placeholder="Message"></textarea>
+                <textarea type="text" name="comment" id="comment" class="entry" placeholder="Message"></textarea>
             </div> 
-            <div>
+            <div class="imgurl">
                 <label for="img"></label>
                 <input type="text" id="img" class="entry" placeholder="image URL (Optionnel)">
             </div>
@@ -36,9 +40,6 @@
             </div> -->
         </form>   
     </fieldset>
-    <div class="return__container">
-        <div class="return spinner"></div>
-    </div>
     <script src="index.js"></script>
 </body>
 </html>
