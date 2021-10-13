@@ -140,7 +140,7 @@ fetch(apiGet)
     // fonction avec fetch pour edit
     const editData = (value) =>{
         console.log(JSON.stringify(data))
-        fetch(`http://localhost:3000/api/${value}`, {
+        fetch(`${apiGet}${value}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
