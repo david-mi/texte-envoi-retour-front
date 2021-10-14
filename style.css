@@ -10,12 +10,12 @@ body{
     flex-direction: column;
     font-family: 'Source Code Pro', monospace;
     background-color: rgb(34, 116, 170);
-    margin-inline: 4%;
     height: 100vh;
     justify-content: space-between;
     padding: 20px;
 
 }
+
 
 span, .initialDate{
     display: block;
@@ -24,29 +24,32 @@ span, .initialDate{
 .send__container,
 .return__container{
     display: flex;
-    flex-direction: column;
     align-items: center;
     position: relative;
     align-self: center;  
 }
 
 .return__container{
+    flex-direction: column;
     max-height: 70%;
     overflow-y: scroll;
     position: relative;
+    
 }
 
 .send__container{
     padding-top: 20px;
     border: 0px;
     bottom: 0px;
+    width: 100%;
+    gap: 10px;
 }
 
 /* FORMULAIRE */
 
 fieldset{
     align-self: center;
-    height: 20%;
+    min-height: 20%;
     position: relative;
 }
 
@@ -56,12 +59,13 @@ form{
     height: 100%;
     display: grid;
     gap: 10px;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: repeat(3, auto);
     grid-template-areas:
-    "name comment"
-    "img comment"
-    "send send";
+    "name comment cat"
+    "img comment cat"
+    "send send send";
+    flex: 1 1 auto;
 }
 
 input, textarea{
@@ -71,6 +75,7 @@ input, textarea{
 
 textarea{
     resize: none;
+    width: 100%;
 }
 
 .name{
@@ -79,18 +84,32 @@ textarea{
 
 .comment{
     grid-area: comment;
+   
 }
 
 .imgurl{
     grid-area: img;
 }
 
+.show-cats{
+    grid-area: cat;
+    padding: 10px;
+    aspect-ratio: 1/1;
+    justify-self: center;
+    align-self: center;
+}
 
+.show-cats::after{
+    content: '\f6be';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 3rem;
+}
 
 
 h1{
-    font-size: 3rem;
-    padding: 30px 50px 50px;
+    font-size: 2rem;
+    padding: 0px 50px 20px;
     color: white;
     text-align: center;
 }
@@ -99,9 +118,10 @@ h1{
 .send-btn{
     grid-area: send;
     width: fit-content;
-    padding: 5px 10px;
+    padding: 10px 20px;
     justify-self: center;
     align-self: center;
+    font-size: 1.5rem;
 }
 
 .return{
@@ -143,7 +163,7 @@ h1{
     grid-area: desc;
 }
 
-img{
+.imgDB{
     grid-area: img;
     display: block;
     min-height: 100px;
@@ -231,3 +251,107 @@ img{
     display:none;
 }
 
+/* CATS */
+
+.chose-cat{
+    height: 100%;
+    flex: 1 1 auto;
+    display: grid;
+    place-items: center;
+}
+
+
+
+.images{
+    position: absolute;
+    inset: 0px;
+    background-color: white;
+}
+
+.cats-title{
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    font-size: 2rem;
+}
+
+.close-cats, .randoms-cats{
+    width: 60px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    z-index: 0;
+    position: absolute;
+    top: 5px;
+}
+
+.close-cats{
+    right: 5px;
+}
+
+.randoms-cats{
+    left: 5px;
+}
+
+.close-cats::after, .randoms-cats::after{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 3rem;
+    z-index: 1; 
+}
+.close-cats::after{
+    content: "\f00d";
+}
+.randoms-cats::after{
+    content: "\f074"
+}
+
+.cats-pics__container{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(34, 116, 170);
+}
+
+.cats-pics__item{
+    height: 150px;
+    flex: 1 1 200px;
+    filter:saturate(0%);
+    padding: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+    transition: 200ms ease-in-out;
+}
+
+.cats-pics__item:hover{
+    cursor: pointer;
+    filter:saturate(1.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgb(58, 58, 58);
+    z-index: 100;
+}
+
+.cats-pics__img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 800px){
+    body{
+        padding-inline: 0px;
+    }
+    .return__item--container{
+        grid-template-columns: 1fr 1fr 1fr auto;
+        grid-template-rows: repeat(4,auto);
+        grid-template-areas: 
+        "name name name del"
+        "desc desc desc edit"
+        "img img img img"
+        "date date date .";
+    }
+    .imgDB{
+        justify-self: flex-start;
+    }
+
+    .send__container{}
+}

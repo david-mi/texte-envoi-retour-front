@@ -22,7 +22,7 @@ fetch(apiGet)
         <div class="return__item--container opacity" id="${dataApi[d]._id}">
             <span class="name"><b>Nom:</b> ${dataApi[d].name}</span>
             <span class="desc"><b>Message:</b> ${dataApi[d].comment}</span>
-            <img src=${dataApi[d].imageUrl} />
+            <img class="imgDB" src=${dataApi[d].imageUrl} />
             <div class="date">
                 <b class="initialDate">${dataApi[d].date}</b>
                 <span class="editedDate">${dataApi[d].editedDate}</span>
@@ -76,15 +76,6 @@ fetch(apiGet)
     
     /// sélections des inputs
     const formInputs = document.querySelectorAll('.entry');
-    
-    /// objet qui sera rempli par les inputs
-    let data = {
-        name: '',
-        comment: '',
-        imageUrl: '',
-        date: '',
-        editedDate:''
-    }
     
     /// boucle à travers les entrées
     for (let entry of formInputs){
